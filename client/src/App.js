@@ -6,7 +6,7 @@ import BookList from "./components/BookList";
 import { Grid, Typography } from '@mui/material';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql',
+  uri: '/graphql',
   cache: new InMemoryCache()
 })
 
