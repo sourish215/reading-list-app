@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { BOOK } from '../queries/queries';
 
 function BookDetails(props) {
-  console.log(props.bookId)
+  //console.log('id',props.bookId)
   const { data, loading, error } = useQuery(BOOK, {
         variables: {
           id: props.bookId
@@ -15,9 +15,12 @@ function BookDetails(props) {
 
   //console.log('data', data.book)
 
+  
+
   function getBookDetails() {
     const { book } = data;
-    console.log('book', book)
+    // console.log('data in details', data)
+    // console.log('book', book)
     if(book) {
       return(
         <>
@@ -38,7 +41,7 @@ function BookDetails(props) {
 
   return (
     <div>
-      <p>Book details: {getBookDetails()}</p>
+      <span>Book details: {getBookDetails()}</span>
     </div>
   )
 }

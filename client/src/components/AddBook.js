@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { AUTHORS, ADD_BOOK, BOOKS } from '../queries/queries';
+import { TextField, Grid, FormControl, InputLabel, Select, MenuItem, Button } from '@mui/material'
 
 function AddBook() {
   const [bookName, setBookName] = useState("");
@@ -9,7 +10,7 @@ function AddBook() {
 
   const { data, loading, error } = useQuery(AUTHORS);
 
-  const [add] = useMutation(ADD_BOOK);
+  const [addBook] = useMutation(ADD_BOOK);
 
   
   if (loading) return <div>Loading books...</div>;
@@ -22,7 +23,7 @@ function AddBook() {
     // console.log(genre)
     // console.log(authorId)
     e.preventDefault();
-    add({
+    addBook({
       variables: {
         name: bookName,
         genre: genre,
@@ -30,35 +31,52 @@ function AddBook() {
       },
       refetchQueries: [{ query: BOOKS }]
     });
+    document.getElementById("add-book").reset();
   }
 
   
   
   return (
-    <form id='add-book' onSubmit={sumbitForm}>
-      <div className='field'>
-        <label>Book Name:</label>
-        <input type='text' onChange={e => setBookName(e.target.value)} />
-      </div>
+    <div>
+      <form id='add-book' onSubmit={sumbitForm}>
+        <Grid container spacing={2} direction='column'>
+          <Grid item xs className='field'>
+            <TextField size='small' label='Book Name' type='text' onChange={e => setBookName(e.target.value)} />
+          </Grid>
 
-      <div className='field'>
-        <label>Genre:</label>
-        <input type='text' onChange={e => setGenre(e.target.value)} />
-      </div>
+          <Grid item xs className='field'>
+            <TextField size='small' label='Genre' type='text' onChange={e => setGenre(e.target.value)} />
+          </Grid>
 
-      <div className='field'>
-        <label>Author:</label>
-        <select onChange={e => setAuthorId(e.target.value)}>
-          <option>Select author</option>
-          {data.authors.map((author, index) => {
-            return <option key={author.id} value={author.id}>{author.name}</option>
-            })}
-        </select>
-      </div>
+          <Grid item xs className='field'>
+            <Select
+              defaultValue={0}
+              size='small'
+              displayEmpty
+              sx={{ minWidth: 210 }}
+              // renderValue={(selected) => {
+              //   if (selected.length === 0) {
+              //     return <em>Placeholder</em>;
+              //   }
+    
+              //   return selected.join(', ');
+              // }}
+              onChange={e => setAuthorId(e.target.value)}>
+                <MenuItem sx={{ display: 'none' }} disabled value={0}>
+                  Author
+                </MenuItem>
+              {data.authors.map((author, index) => {
+                return <MenuItem key={author.id} value={author.id}>{author.name}</MenuItem>
+                })}
+            </Select>
+          </Grid>
 
-      <button>+</button>
-
-    </form>
+          <Grid item xs>
+            <Button type='submit' size='small' variant='contained'>Add Book</Button>
+          </Grid>
+        </Grid>
+      </form>
+    </div>
   )
 }
 

@@ -26,6 +26,14 @@ const ADD_BOOK = gql`
     }
   }
 `
+const ADD_AUTHOR =  gql`
+  mutation addAuthorMutation($name: String!){
+    addAuthor(name: $name){
+      name
+    }
+  }
+`
+
 
 const BOOK = gql`
   query getBookDetail($id: ID){
@@ -36,7 +44,6 @@ const BOOK = gql`
       author{
         id
         name
-        age
         books{
           name
           id
@@ -46,4 +53,4 @@ const BOOK = gql`
   }
 `
 
-export { BOOKS, AUTHORS, ADD_BOOK, BOOK };
+export { BOOKS, AUTHORS, ADD_BOOK, ADD_AUTHOR, BOOK };

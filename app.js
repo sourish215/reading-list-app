@@ -10,6 +10,8 @@ app.use(cors());
 
 const PORT = process.env.PORT || 4000
 
+console.log(PORT)
+
 mongoose.connect('mongodb+srv://sourishb:%40sgqlB97%21@cluster0.2p6dqsc.mongodb.net/?retryWrites=true&w=majority')
 mongoose.connection.once('open', () => {
   console.log('connected to database')
