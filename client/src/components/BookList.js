@@ -12,6 +12,7 @@ export default function BookList() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [severity, setSeverity] = useState("");
+  const [removed, setRemoved] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const { data, loading, error } = useQuery(BOOKS);
   const [removeBook] = useMutation(DELETE_BOOK);
@@ -35,7 +36,8 @@ export default function BookList() {
     });
     setOpen(true);
     setMessage("Book removed!");
-    setSeverity("warning")
+    setSeverity("warning");
+    setRemoved(true);
   }
 
   // data?.books?.map(book => {
@@ -47,8 +49,8 @@ export default function BookList() {
       <Grid
         container
         spacing={2}
-        direction='column'
-        sx={{ alignContent: 'center' }}
+        direction='row'
+        // sx={{ alignContent: 'center' }}
       >
         <Grid item xs 
           sx={{ backgroundColor: '#7ec3b0', borderRadius: '5px' }}
@@ -59,9 +61,10 @@ export default function BookList() {
               <ListItem
                 divider
                 key={book.id}
-                onClick={e => {
+                onClick={() => {
                   setSelectedId(book.id);
-                  setOpenDetails(true)
+                  setOpenDetails(true);
+                  setRemoved(false);
                   }}>
                   <ListItemIcon><ArrowRightIcon /></ListItemIcon>
                   {book.name}
@@ -78,7 +81,7 @@ export default function BookList() {
           </List>
         </Grid>
         <Grid item xs>
-          <BookDetails bookId={selectedId} openDetails={openDetails} setOpenDetails={setOpenDetails} />
+          <BookDetails bookId={selectedId} openDetails={openDetails} setOpenDetails={setOpenDetails} removed={removed} />
         </Grid>
       </Grid>
       <SnackbarComponent open={open} setOpen={setOpen} message={message} severity={severity} />

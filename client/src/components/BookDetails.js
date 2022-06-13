@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { BOOK } from '../queries/queries';
 import { Button, Typography } from '@mui/material';
 
-function BookDetails({ bookId, openDetails, setOpenDetails }) {
+function BookDetails({ bookId, openDetails, setOpenDetails, removed }) {
   //console.log('id',props.bookId)
   const { data, loading, error } = useQuery(BOOK, {
         variables: {
@@ -14,7 +14,7 @@ function BookDetails({ bookId, openDetails, setOpenDetails }) {
   if (loading) return <div>Loading details...</div>;
   if (error) return <pre>{error.message}</pre>
 
-  //console.log('data', data.book)
+  // console.log('data', data.book)
 
   
 
@@ -22,7 +22,7 @@ function BookDetails({ bookId, openDetails, setOpenDetails }) {
     const { book } = data;
     // console.log('data in details', data)
     // console.log('book', book)
-    if(book && openDetails) {
+    if(book && openDetails && !removed) {
       return(
         <div>
           <h2>{book.name}</h2>

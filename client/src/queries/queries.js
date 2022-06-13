@@ -33,6 +33,16 @@ const ADD_AUTHOR =  gql`
     }
   }
 `
+// const UPDATE_BOOK = gql`
+//   mutation updateBookMutation($id: ID!, $status: String!){
+//     updateBook(id: $id, status: $status){
+//       id
+//       name
+//       status
+//     }
+//   }
+// `
+
 const DELETE_BOOK = gql`
   mutation deleteBook($id: ID!){
     deleteBook(id: $id){

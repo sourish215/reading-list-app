@@ -19,7 +19,8 @@ function AddBook() {
 
   
   if (loading || books.loading) return <div>Loading books...</div>;
-  if (error || books.error) return (<pre>{error.message}</pre>);
+  if (error) return (<pre>{error.message}</pre>);
+  if(books.error) return (<pre>{books.error.message}</pre>);
 
   // console.log('data', data.authors)
   let booksArr = books.data.books;
@@ -72,9 +73,6 @@ function AddBook() {
                 sx={{ minWidth: 210 }}
                 label='Author'
                 onChange={e => setAuthorId(e.target.value)}>
-                  {/* <MenuItem sx={{ display: 'none' }} disabled value={0}>
-                    Author
-                  </MenuItem> */}
                 {data.authors.map((author, index) => {
                   return <MenuItem key={author.id} value={author.id}>{author.name}</MenuItem>
                   })}

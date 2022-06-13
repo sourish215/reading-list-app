@@ -127,13 +127,13 @@ const Mutation = new GraphQLObjectType({
       args: {
         name: { type: new GraphQLNonNull(GraphQLString) },
         genre: { type: new GraphQLNonNull(GraphQLString) },
-        authorid: { type: new GraphQLNonNull(GraphQLID) }
+        authorid: { type: new GraphQLNonNull(GraphQLID) },
       },
       resolve(parent, args){
         let book = new Book({
           name: args.name,
           genre: args.genre,
-          authorid: args.authorid
+          authorid: args.authorid,
         });
         return book.save();
       }
@@ -146,7 +146,18 @@ const Mutation = new GraphQLObjectType({
       resolve(parent, args) {
         return Book.findByIdAndRemove(args.id);
       }
-    }
+    },
+    // updateBook: {
+    //   type: BookType,
+    //   args: {
+    //     id: { type: new GraphQLNonNull(GraphQLID) },
+    //     status: { type: new GraphQLNonNull(GraphQLString) }
+    //   },
+    //   resolve(parent, args) {
+    //     let book = Book.findById(args.id);
+    //     return book
+    //   }
+    // }
   }
 })
 
