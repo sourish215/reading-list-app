@@ -14,9 +14,9 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <div id="main">
-        <Typography variant='h4'>Reading List</Typography>
+        <Typography variant='h4' align='center'>Reading List</Typography>
         <br />
-        <Grid container direction='row' spacing={4}>
+        <Grid container direction='row' spacing={2}>
           <Grid item container direction='column' spacing={4} xs>
             <Grid item><AddBook /></Grid>
             <Grid item><AddAuthor /></Grid>
