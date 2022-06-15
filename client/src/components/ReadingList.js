@@ -5,6 +5,13 @@ import AddBook from './AddBook';
 import BookList from "./BookList";
 
 function ReadingList() {
+
+  // React.useEffect(() => {
+  //   fetch('https://api.quotable.io/quotes')
+  //     .then(results => results.json())
+  //     .then(data => console.log(data))
+  //     }, []);
+
   return (
     <div>
       <Grid container direction='row' spacing={2}>

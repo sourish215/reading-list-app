@@ -25,7 +25,7 @@ function BookDetails({ bookId, openDetails, setOpenDetails, removed }) {
     if(book && openDetails && !removed) {
       return(
         <div>
-          <h2>{book.name}</h2>
+          <Typography variant='h5'>{book.name}</Typography>
           <p>{book.genre}</p>
           <p>{book.author.name}</p>
           <p>All books by {book.author.name}:</p>
